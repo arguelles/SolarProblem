@@ -1,7 +1,11 @@
+#ifndef _solar_probabilities_
+#define _solar_probabilities_
+
 #include <SQuIDS/Const.h>
 #include <SQuIDS/SUNalg.h>
 #include <gsl/gsl_complex_math.h>
 #include "marray.h"
+#include "SMinit.h"
 
 class SOP {
   private:
@@ -10,7 +14,15 @@ class SOP {
     /// \brief flavors
     enum flavors {nue = 0,numu = 1,nutau = 2};
     /// \brief mixing parameters
-    std::shared_ptr<squids::Const> params;
+    std::shared_ptr<squids::Const> params = nullptr;
+    /// \brief solar model object
+    std::shared_ptr<littlemermaid> solar_model = nullptr;
+    /// \brief CC interaction prefactor
+    double CC_prefactor = -1;
+    /// \brief Set std CC prefactor
+    void SetPotentialPrefactor(){
+      CC_prefactor = params->sqrt2*params->GF*params->Na*pow(params->cm,-3);
+    }
   protected:
     squids::SU_vector DM2;
     /// \details The i-entry corresponds to the projector in the ith mass eigenstate.
@@ -36,6 +48,7 @@ class SOP {
         b1_proj[flv].RotateToB1(*params);
       }
     }
+    squids::SU_vector Hamiltonian(double E, double r) const;
   public:
     SOP(){
       b0_proj.resize(std::vector<size_t>{numneu});
@@ -43,19 +56,37 @@ class SOP {
           b0_proj[flv] = squids::SU_vector::Projector(numneu,flv);
         }
     }
+
     void SetMixingParameters(std::shared_ptr<squids::Const> params_){
       params = params_;
+      SetPotentialPrefactor();
       SetVacuumHamiltonian();
       SetFlavorProjectors();
     }
+
     void SetMixingParameters(){
+      SetPotentialPrefactor();
       SetVacuumHamiltonian();
       SetFlavorProjectors();
     }
-    std::shared_ptr<squids::Const> GetMixingParameters(){
+
+    std::shared_ptr<squids::Const> GetMixingParameters() const{
+      if (params == nullptr)
+        throw std::runtime_error("No oscillation parameters set");
       return params;
     }
-    squids::SU_vector Hamiltonian(double E, double r) const;
+
+    void SetSolarModel(std::shared_ptr<littlemermaid> solar_model_){
+      solar_model = solar_model_;
+    }
+
+    std::shared_ptr<littlemermaid> GetSolarModel(){
+      if (solar_model == nullptr)
+        throw std::runtime_error("No solar model set");
+      return solar_model;
+    }
+
     double SolarOscillationProbability(double E,double r) const;
 };
 
+#endif

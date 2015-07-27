@@ -1,3 +1,6 @@
+#ifndef _SMinit_
+#define _SMinit_
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
@@ -28,10 +31,11 @@ class littlemermaid {
 			splineinit();
 		}
     nusquids::marray<double,2> fluxNorm;
-		double nuFlux(double , double, FluxType) const;
-		double eDensity(double) const;
-		double DMDensity(double) const;
+		double nuFlux(double r, double ee, FluxType) const;
+		double eDensity(double r) const;
+		double DMDensity(double r) const;
 
     virtual ~littlemermaid();
 };
 
+#endif
