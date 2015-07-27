@@ -1,4 +1,4 @@
-CXXFLAGS+=-O3 -std=c++11 -fPIC
+CXXFLAGS+=-O3 -std=c++11 -fPIC -g
 
 CXX = clang++
 
@@ -55,5 +55,5 @@ mains : $(MAINS)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
-	rm -f src/*.o lib/* bin/* mains/*.o
+	rm -fr src/*.o lib/* bin/* mains/*.o
 
