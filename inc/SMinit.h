@@ -49,10 +49,10 @@ class littlemermaid {
       Racc.resize(num_components);Rspline.resize(num_components);
       Eacc.resize(num_components);Espline.resize(num_components);
       for(auto& racc : Racc){
-        racc.reset(gsl_interp_accel_alloc(),[](gsl_interp_accel* t){ gsl_interp_accel_free(t); delete t;});
+        racc.reset(gsl_interp_accel_alloc(),[](gsl_interp_accel* t){ gsl_interp_accel_free(t);});
       }
       for(auto& eacc : Eacc){
-        eacc.reset(gsl_interp_accel_alloc(),[](gsl_interp_accel* t){ gsl_interp_accel_free(t); delete t;});
+        eacc.reset(gsl_interp_accel_alloc(),[](gsl_interp_accel* t){ gsl_interp_accel_free(t);});
       }
 
       // initialize splines

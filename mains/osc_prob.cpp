@@ -7,6 +7,7 @@ using namespace squids;
 
 int main(){
   SOP sop;
+
   std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("AGSS09");
   std::shared_ptr<Const> parameters = std::make_shared<Const>();
 
