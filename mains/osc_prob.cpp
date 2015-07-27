@@ -13,10 +13,20 @@ int main(){
   std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("AGSS09");
   std::shared_ptr<Const> parameters = std::make_shared<Const>();
 
+  parameters->SetMixingAngle(0,1,0.583996); // th12
+  parameters->SetMixingAngle(0,2,0.148190); // th13
+  parameters->SetMixingAngle(1,2,0.737324); // th23
+  parameters->SetEnergyDifference(1,7.5e-05); // dm^2_21
+  parameters->SetEnergyDifference(2,0.00257); // dm^2_31
+  parameters->SetPhase(0,2,0.0); // delta_13 = diract cp phase
+
   sop.SetMixingParameters(parameters);
   sop.SetSolarModel(sm);
 
-  auto e_range = linspace(0.1,10,100);
+  //std::cout << sop.SolarOscillationProbability(0.1*units.MeV,0.1) << std::endl;
+  //exit(1);
+
+  auto e_range = linspace(0.1,20,100);
   for(double e: e_range){
     std::cout << e << " " << sop.SolarOscillationProbability(e*units.MeV,0.1) << std::endl;
   }
