@@ -23,6 +23,8 @@ class SOP {
     void SetPotentialPrefactor(){
       CC_prefactor = params->sqrt2*params->GF*params->Na*pow(params->cm,-3);
     }
+    /// \brief PMNS matrix
+    std::shared_ptr<gsl_matrix_complex> UPMNS = nullptr;
   protected:
     squids::SU_vector DM2;
     /// \details The i-entry corresponds to the projector in the ith mass eigenstate.
@@ -59,12 +61,17 @@ class SOP {
 
     void SetMixingParameters(std::shared_ptr<squids::Const> params_){
       params = params_;
+      UPMNS = params->GetTransformationMatrix(numneu);
+      //gsl_matrix_complex_print(UPMNS.get());
       SetPotentialPrefactor();
       SetVacuumHamiltonian();
       SetFlavorProjectors();
     }
 
     void SetMixingParameters(){
+      if (params == nullptr)
+        throw std::runtime_error("No oscillation parameters set");
+      UPMNS = params->GetTransformationMatrix(numneu);
       SetPotentialPrefactor();
       SetVacuumHamiltonian();
       SetFlavorProjectors();

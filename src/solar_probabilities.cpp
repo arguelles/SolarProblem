@@ -11,9 +11,8 @@ double SOP::SolarOscillationProbability(double E,double r) const {
 
   SU_vector h = Hamiltonian(E,r);
   auto eigensyst = h.GetEigenSystem();
-  auto UPMNS = params->GetTransformationMatrix(numneu);
-
-  //gsl_matrix_complex_print(UPMNS.get());
+  // order according to eigenvalues
+  gsl_eigen_hermv_sort(eigensyst.first.get(),eigensyst.second.get(),GSL_EIGEN_SORT_VAL_ASC);
 
   double osc_prob = 0;
   for(unsigned int i = 0; i < numneu; i++){
