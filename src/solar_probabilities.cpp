@@ -16,7 +16,7 @@ double SOP::SolarOscillationProbability(double E,double r) const {
   double osc_prob = 0;
   for(unsigned int i = 0; i < numneu; i++){
     osc_prob += gsl_complex_abs2(gsl_matrix_complex_get(eigensyst.second.get(),nue,i))*\
-                gsl_complex_abs2(gsl_matrix_complex_get(UPMNS.get(),nue,i));
+                gsl_complex_abs2(gsl_matrix_complex_get(UPMNS.get(),i,nue));
   }
   return osc_prob;
 }

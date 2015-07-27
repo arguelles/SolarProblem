@@ -70,7 +70,7 @@ double littlemermaid::eDensity(double R) const {
 	if (R > 1.0 || R < 0.0){
     throw std::runtime_error("Invalid R, must be between 0 and 1.");
   }
-	return exp(gsl_spline_eval(Rspline[Electron].get(),R,Racc[Electron].get()));
+	return pow(10.,gsl_spline_eval(Rspline[Electron].get(),R,Racc[Electron].get()));
 }
 
 double littlemermaid::DMDensity(double R) const {
