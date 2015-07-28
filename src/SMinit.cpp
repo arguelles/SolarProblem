@@ -10,7 +10,7 @@ void littlemermaid::splineinit(){
 
 	unsigned int arraysize = fluxR.extent(0);
 	double XfluxRarr[arraysize];
-  	for(unsigned int j = 0; j < arraysize; j++){
+  	for(unsigned int j = 1; j < arraysize; j++){
     	XfluxRarr[j] = fluxR[j][0];
   	}
 
