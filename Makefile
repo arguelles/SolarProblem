@@ -27,7 +27,7 @@ STAT_PRODUCT=lib$(NAME).a
 DYN_PRODUCT=lib$(NAME)$(DYN_SUFFIX)
 
 LDFLAGS+=-Wl,-rpath -Wl,$(SSOPATH)/lib -L$(SSOPATH)/lib -lSolar
-LDFLAGS+=-lSQuIDS -lgsl
+LDFLAGS+=-lSQuIDS -lgsl -lgslcblas
 
 MAINS_SRC=$(wildcard mains/*.cpp)
 MAINS=$(patsubst mains/%.cpp,bin/%.exe,$(MAINS_SRC))
