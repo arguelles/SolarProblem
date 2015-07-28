@@ -64,11 +64,10 @@ class littlemermaid {
       // initialize splines
 			splineinit();
 		}
-    nusquids::marray<double,2> fluxNorm;
 		double nuFlux(double r, double ee, FluxType) const;
 		double eDensity(double r) const;
 		double DMDensity(double r) const;
-    unsigned int NumComp() const;
+    	unsigned int NumComp() const;
 
     //virtual ~littlemermaid();
 };
