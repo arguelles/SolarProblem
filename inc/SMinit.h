@@ -20,7 +20,7 @@ class littlemermaid {
     /// \brief component settings
     enum FluxType {pp = 0, pep = 1, hep = 2, be7 = 3, b8 = 4, n13 = 5, o15 = 6, f17 = 7, Electron = 8, DM = 9};
 	private:
-    const std::string datapath = "../SM/";
+    const std::string datapath = "SM/";
     const double Emin = 3.4640e3;
     const double Emax = 1.8784e07;
 	const double Rsun = 69662651411.1;
