@@ -72,3 +72,6 @@ double littlemermaid::DMDensity(double R) const {
 	return gsl_spline_eval(Rspline[DM].get(),R*Rsun,Racc[DM].get());
 }
 
+unsigned int littlemermaid::NumComp() const {
+  return 8;
+}

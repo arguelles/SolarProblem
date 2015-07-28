@@ -35,3 +35,21 @@ SU_vector SOP::Hamiltonian(double E, double r) const {
   return std::move(H);
 }
 
+double SOP::PeeCuadradito(double E) const{
+  double normalization = 1./RadialIntegratedFluxes(E);
+  return integrate([&](double r){
+              double sum_flux = 0.;
+              for ( unsigned int i = 0; i < solar_model->NumComp(); i++)
+                sum_flux += SolarOscillationProbability(E,r)*solar_model->nuFlux(r,E,littlemermaid::FluxType(i));
+              return sum_flux;
+          },0.,1.)*normalization;
+}
+
+double SOP::RadialIntegratedFluxes(double E) const{
+  return integrate([&](double r){
+              double sum_flux = 0.;
+              for ( unsigned int i = 0; i < solar_model->NumComp(); i++)
+                sum_flux += solar_model->nuFlux(r,E,littlemermaid::FluxType(i));
+              return sum_flux;
+          },0.,1.);
+}
