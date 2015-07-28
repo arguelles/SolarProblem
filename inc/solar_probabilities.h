@@ -21,7 +21,7 @@ double integrate(FunctionType f, double a, double b){
 	F.function = wrapper;
 	F.params = &f;
 
-	gsl_integration_qags(&F, a, b, 0, 1e-7, 1000, ws, &result, &error);
+	gsl_integration_qags(&F, a, b, 0, 1e-1, 1000, ws, &result, &error);
 	gsl_integration_workspace_free(ws);
 
 	return(result);

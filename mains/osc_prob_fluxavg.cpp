@@ -13,8 +13,8 @@ int main(){
   std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("Standard");
   std::shared_ptr<Const> parameters = std::make_shared<Const>();
 
-  parameters->SetMixingAngle(0,1,0.583996); // th12
-  parameters->SetMixingAngle(0,2,0.148190); // th13
+  parameters->SetMixingAngle(0,1,0.508); // th12
+  parameters->SetMixingAngle(0,2,0.1472); // th13
   parameters->SetMixingAngle(1,2,0.737324); // th23
   parameters->SetEnergyDifference(1,7.5e-05); // dm^2_21
   parameters->SetEnergyDifference(2,0.00257); // dm^2_31
@@ -23,12 +23,10 @@ int main(){
   sop.SetMixingParameters(parameters);
   sop.SetSolarModel(sm);
 
-  //std::cout << sop.SolarOscillationProbability(0.1*units.MeV,0.1) << std::endl;
-  //exit(1);
-
-  auto e_range = linspace(0.1,20,100);
+  //auto e_range = linspace(0.1,20,100);
+  auto e_range = logspace(0.01,20,1000);
   for(double e: e_range){
-    std::cout << e << " " << sop.SolarOscillationProbability(e*units.MeV,0.1) << std::endl;
+    std::cout << e << " " << sop.RadialIntegratedFluxes(e*units.MeV) << " " << sop.PeeCuadradito(e*units.MeV)<< std::endl;
   }
 
   return 0;
