@@ -23,6 +23,7 @@ class littlemermaid {
     const std::string datapath = "../SM/";
     const double Emin = 3.4640e3;
     const double Emax = 1.8784e07;
+	const double Rsun = 69662651411.1;
     const double MeV = 1.0e6;
     const unsigned int num_components = 10;
     std::map<FluxType,std::string> spectrum_filename {{pp,"pp.dat"},{pep,""},{hep,"hep.dat"},{be7,""},{b8,"b8.dat"},{n13,"n13.dat"},{o15,"o15.dat"},{f17,"f17.dat"},{Electron,""},{DM,""}};
