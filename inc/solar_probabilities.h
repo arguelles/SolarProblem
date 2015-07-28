@@ -1,7 +1,7 @@
 #ifndef _solar_probabilities_
 #define _solar_probabilities_
 
-#include <SQuIDS/Const.h>
+#include <SQuIDS/const.h>
 #include <SQuIDS/SUNalg.h>
 #include <gsl/gsl_complex_math.h>
 #include "marray.h"

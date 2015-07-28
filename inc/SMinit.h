@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <map>
+#include <memory>
 
 #include <gsl/gsl_errno.h>
 #include <gsl/gsl_spline.h>

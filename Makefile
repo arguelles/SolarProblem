@@ -1,6 +1,7 @@
 CXXFLAGS+=-O3 -std=c++11 -fPIC -g
 
-CXX = clang++
+#CXX = clang++
+CXX = g++
 
 SSOPATH=$(shell pwd)/
 
