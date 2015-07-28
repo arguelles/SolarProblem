@@ -23,7 +23,8 @@ int main(){
   sop.SetMixingParameters(parameters);
   sop.SetSolarModel(sm);
 
-  auto e_range = linspace(0.1,20,100);
+  //auto e_range = linspace(0.1,20,100);
+  auto e_range = logspace(0.01,20,1000);
   for(double e: e_range){
     std::cout << e << " " << sop.RadialIntegratedFluxes(e*units.MeV) << " " << sop.PeeCuadradito(e*units.MeV)<< std::endl;
   }
