@@ -15,7 +15,7 @@ void littlemermaid::splineinit(){
   	}
 
 	for(unsigned int i = 0; i <= 9; i++){
-    	Rspline[i].reset(gsl_spline_alloc (gsl_interp_cspline, arraysize),[](gsl_spline* t){gsl_spline_free(t);});
+    	Rspline[i].reset(gsl_spline_alloc (gsl_interp_linear, arraysize),[](gsl_spline* t){gsl_spline_free(t);});
     	double YfluxRarr[arraysize];
     	for(unsigned int j = 0; j < arraysize; j++){
 	        YfluxRarr[j] = fluxR[j][i+1];
@@ -30,7 +30,7 @@ void littlemermaid::splineinit(){
 	}
 	    marray<double,2> spectrum_table = quickread(datapath + "/NuSpec/" + spectrum_filename[FluxType(i)]);
 	    unsigned int arraysize_ = spectrum_table.extent(0);
-	    Espline[i].reset(gsl_spline_alloc (gsl_interp_cspline, arraysize_),[](gsl_spline* t){gsl_spline_free(t);});
+	    Espline[i].reset(gsl_spline_alloc (gsl_interp_linear, arraysize_),[](gsl_spline* t){gsl_spline_free(t);});
 	    double ESpectrum[arraysize_]; double FSpectrum[arraysize_];
 	    for(unsigned int j = 0; j < arraysize_ ; j++){
 		      ESpectrum[j] = spectrum_table[j][0]*MeV;
