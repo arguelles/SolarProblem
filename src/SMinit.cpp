@@ -81,3 +81,6 @@ double littlemermaid::DMDensity(double R) const {
 	return 0.0;
 }
 
+unsigned int littlemermaid::NumComp() const {
+  return 8;
+}

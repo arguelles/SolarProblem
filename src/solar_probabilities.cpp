@@ -35,3 +35,11 @@ SU_vector SOP::Hamiltonian(double E, double r) const {
   return std::move(H);
 }
 
+double SOP::RadialIntegratedFluxes(double E) const{
+  return integrate([&](double r){
+              double sum_flux = 0.;
+              for ( unsigned int i = 0; i < solar_model->NumComp(); i++)
+                sum_flux += solar_model->nuFlux(r,E,littlemermaid::pp);
+              return sum_flux;
+          },0.,1.);
+}
