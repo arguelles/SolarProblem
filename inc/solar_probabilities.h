@@ -114,6 +114,7 @@ class SOP {
     }
 
     double SolarOscillationProbability(double E,double r) const;
+    double PeeCuadradito(double E) const;
     double RadialIntegratedFluxes(double E) const;
 };
 
