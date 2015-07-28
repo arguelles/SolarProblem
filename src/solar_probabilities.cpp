@@ -39,8 +39,15 @@ double SOP::PeeCuadradito(double E) const{
   double normalization = 1./RadialIntegratedFluxes(E);
   return integrate([&](double r){
               double sum_flux = 0.;
-              for ( unsigned int i = 0; i < solar_model->NumComp(); i++)
-                sum_flux += SolarOscillationProbability(E,r)*solar_model->nuFlux(r,E,littlemermaid::FluxType(i));
+              for ( unsigned int i = 0; i < solar_model->NumComp(); i++){
+                if (not solar_model->isline[littlemermaid::FluxType(i)] ) {
+                  sum_flux += SolarOscillationProbability(E,r)*solar_model->nuFlux(r,E,littlemermaid::FluxType(i));
+                } else if ( std::abs(E - solar_model->spectrum_limits[littlemermaid::FluxType(i)][0])/E < 1.0e-3 ) {
+                  // if close to the line evaluate the line
+                  double E_line = solar_model->spectrum_limits[littlemermaid::FluxType(i)][0];
+                  sum_flux += SolarOscillationProbability(E_line,r)*solar_model->nuFlux(r,E_line,littlemermaid::FluxType(i));
+                }
+              }
               return sum_flux;
           },0.,1.)*normalization;
 }
@@ -48,8 +55,14 @@ double SOP::PeeCuadradito(double E) const{
 double SOP::RadialIntegratedFluxes(double E) const{
   return integrate([&](double r){
               double sum_flux = 0.;
-              for ( unsigned int i = 0; i < solar_model->NumComp(); i++)
-                sum_flux += solar_model->nuFlux(r,E,littlemermaid::FluxType(i));
+              for ( unsigned int i = 0; i < solar_model->NumComp(); i++){
+                if (not solar_model->isline[littlemermaid::FluxType(i)] ) {
+                  sum_flux += solar_model->nuFlux(r,E,littlemermaid::FluxType(i));
+                } else if ( std::abs(E - solar_model->spectrum_limits[littlemermaid::FluxType(i)][0])/E < 1.0e-3 ) {
+                  // if close to the line evaluate the line
+                  sum_flux += solar_model->nuFlux(r,solar_model->spectrum_limits[littlemermaid::FluxType(i)][0],littlemermaid::FluxType(i));
+                }
+              }
               return sum_flux;
           },0.,1.);
 }

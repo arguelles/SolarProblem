@@ -19,14 +19,17 @@ class littlemermaid {
   public:
     /// \brief component settings
     enum FluxType {pp = 0, pep = 1, hep = 2, be7 = 3, b8 = 4, n13 = 5, o15 = 6, f17 = 7, Electron = 8, DM = 9};
+    /// \brief line features
+    std::map<FluxType,bool> isline {{pp,false},{pep,true},{hep,false},{be7,true},{n13,false},{o15,false},{f17,false}};
 	private:
     const std::string datapath = "SM/";
     const double Emin = 3.4640e3;
     const double Emax = 1.8784e07;
-	const double Rsun = 69662651411.1;
+    const double Rsun = 69662651411.1;
     const double MeV = 1.0e6;
     const unsigned int num_components = 10;
     std::map<FluxType,std::string> spectrum_filename {{pp,"pp.dat"},{pep,""},{hep,"hep.dat"},{be7,""},{b8,"b8.dat"},{n13,"n13.dat"},{o15,"o15.dat"},{f17,"f17.dat"},{Electron,""},{DM,""}};
+  public:
     std::map<FluxType,std::vector<double>> spectrum_limits {{pp,{0.00504e6,0.42341e6}},
                                                             {pep,{1.44e6}},
                                                             {hep,{1.8784e4,1.8784e7}},
@@ -37,6 +40,7 @@ class littlemermaid {
                                                             {f17,{3.4800e3,1.7400e6}},
                                                             {Electron,{}},
                                                             {DM,{}}};
+  private:
     ///\brief Splines
     std::vector<std::shared_ptr<gsl_interp_accel>> Racc;
     std::vector<std::shared_ptr<gsl_spline>> Rspline;
