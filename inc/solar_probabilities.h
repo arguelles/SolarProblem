@@ -15,13 +15,13 @@ double integrate(FunctionType f, double a, double b){
 		return(f(x));
 	};
 
-	gsl_integration_workspace* ws=gsl_integration_workspace_alloc(1000);
+	gsl_integration_workspace* ws=gsl_integration_workspace_alloc(10000);
 	double result, error;
 	gsl_function F;
 	F.function = wrapper;
 	F.params = &f;
 
-	gsl_integration_qags(&F, a, b, 0, 1e-1, 1000, ws, &result, &error);
+	gsl_integration_qags(&F, a, b, 0, 1e-2, 10000, ws, &result, &error);
 	gsl_integration_workspace_free(ws);
 
 	return(result);

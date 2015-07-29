@@ -13,8 +13,8 @@ int main(){
   std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("Standard");
   std::shared_ptr<Const> parameters = std::make_shared<Const>();
 
-  parameters->SetMixingAngle(0,1,0.508); // th12
-  parameters->SetMixingAngle(0,2,0.1472); // th13
+  parameters->SetMixingAngle(0,1,0.583996); // th12
+  parameters->SetMixingAngle(0,2,0.148190); // th13
   parameters->SetMixingAngle(1,2,0.737324); // th23
   parameters->SetEnergyDifference(1,7.5e-05); // dm^2_21
   parameters->SetEnergyDifference(2,0.00257); // dm^2_31
