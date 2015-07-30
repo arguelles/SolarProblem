@@ -13,16 +13,25 @@ double SOP::SolarOscillationProbability(double E,double r) const {
   auto eigensyst = h.GetEigenSystem();
   // order according to eigenvalues
   gsl_eigen_hermv_sort(eigensyst.first.get(),eigensyst.second.get(),GSL_EIGEN_SORT_VAL_ASC);
-/*
-  std::cout << "hamiltonian" << std::endl;
+
+  /*
+  std::cout << "eigenvectors" << std::endl;
   gsl_matrix_complex_print(eigensyst.second.get());
   std::cout << "UPMNS" << std::endl;
   gsl_matrix_complex_print(UPMNS.get());
-*/
+  std::cout << "hamiltonian" << std::endl;
+  auto h_gsl = h.GetGSLMatrix();
+  gsl_matrix_complex_print(h_gsl.get());
+  */
 
   double osc_prob = 0;
   for(unsigned int i = 0; i < numneu; i++){
-    osc_prob += gsl_complex_abs2(gsl_matrix_complex_get(eigensyst.second.get(),i,nue))*\
+    /*
+    std::cout << i+1 << " " << nue+1 << " ";
+    std::cout << gsl_complex_abs2(gsl_matrix_complex_get(eigensyst.second.get(),nue,i)) << std::endl;
+    std::cout << gsl_complex_abs2(gsl_matrix_complex_get(UPMNS.get(),nue,i)) << std::endl;
+    */
+    osc_prob += gsl_complex_abs2(gsl_matrix_complex_get(eigensyst.second.get(),nue,i))*\
                 gsl_complex_abs2(gsl_matrix_complex_get(UPMNS.get(),nue,i));
   }
   return osc_prob;
@@ -31,6 +40,7 @@ double SOP::SolarOscillationProbability(double E,double r) const {
 SU_vector SOP::Hamiltonian(double E, double r) const {
   //double electron_number_density = solar_model->eDensity(r);
   double electron_number_density = 102.687655;
+  //double electron_number_density = 0.;
   //std::cout << "ne" << " " << electron_number_density << std::endl;
 
   SU_vector H = DM2*(1./(2.*E));
