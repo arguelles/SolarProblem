@@ -1,4 +1,4 @@
-CXXFLAGS+=-O3 -std=c++11 -fPIC
+CXXFLAGS+=-O3 -std=c++11 -fPIC -g
 
 #CXX = clang++
 CXX = g++

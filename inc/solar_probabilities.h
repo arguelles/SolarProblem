@@ -63,20 +63,28 @@ class SOP {
       }
     }
     /// \brief Resets the flavor projectors
-    void SetFlavorProjectors(){
-      b1_proj.resize(std::vector<size_t>{numneu});
+    void SetProjectors(){
+      /*
+        b1_proj.resize(std::vector<size_t>{numneu});
+        for(unsigned int flv = 0; flv < numneu; flv++){
+          b1_proj[flv] = squids::SU_vector::Projector(numneu,flv);
+          //b1_proj[flv].RotateToB1(*params);
+        }
+      */
+      b0_proj.resize(std::vector<size_t>{numneu});
       for(unsigned int flv = 0; flv < numneu; flv++){
-        b1_proj[flv] = squids::SU_vector::Projector(numneu,flv);
-        b1_proj[flv].RotateToB1(*params);
+        b0_proj[flv] = squids::SU_vector::Projector(numneu,flv);
+        b0_proj[flv].RotateToB0(*params);
       }
     }
     squids::SU_vector Hamiltonian(double E, double r) const;
   public:
     SOP(){
-      b0_proj.resize(std::vector<size_t>{numneu});
-        for(unsigned int flv = 0; flv < numneu; flv++){
-          b0_proj[flv] = squids::SU_vector::Projector(numneu,flv);
-        }
+      b1_proj.resize(std::vector<size_t>{numneu});
+      for(unsigned int flv = 0; flv < numneu; flv++){
+        b1_proj[flv] = squids::SU_vector::Projector(numneu,flv);
+        //b1_proj[flv].RotateToB1(*params);
+      }
     }
 
     void SetMixingParameters(std::shared_ptr<squids::Const> params_){
@@ -84,8 +92,8 @@ class SOP {
       UPMNS = params->GetTransformationMatrix(numneu);
       //gsl_matrix_complex_print(UPMNS.get());
       SetPotentialPrefactor();
+      SetProjectors();
       SetVacuumHamiltonian();
-      SetFlavorProjectors();
     }
 
     void SetMixingParameters(){
@@ -93,8 +101,8 @@ class SOP {
         throw std::runtime_error("No oscillation parameters set");
       UPMNS = params->GetTransformationMatrix(numneu);
       SetPotentialPrefactor();
+      SetProjectors();
       SetVacuumHamiltonian();
-      SetFlavorProjectors();
     }
 
     std::shared_ptr<squids::Const> GetMixingParameters() const{

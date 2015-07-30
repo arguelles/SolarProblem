@@ -26,9 +26,9 @@ int main(){
   //std::cout << sop.SolarOscillationProbability(0.1*units.MeV,0.1) << std::endl;
   //exit(1);
 
-  auto e_range = linspace(0.1,20,100);
+  auto e_range = linspace(0.1,15,20);
   for(double e: e_range){
-    std::cout << e << " " << sop.SolarOscillationProbability(e*units.MeV,0.1) << std::endl;
+    std::cout << e << " " << sop.SolarOscillationProbability(e*units.MeV,0.01) << std::endl;
   }
 
   return 0;
