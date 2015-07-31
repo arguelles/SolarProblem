@@ -38,9 +38,7 @@ double SOP::SolarOscillationProbability(double E,double r) const {
 }
 
 SU_vector SOP::Hamiltonian(double E, double r) const {
-  //double electron_number_density = solar_model->eDensity(r);
-  double electron_number_density = 102.687655;
-  //double electron_number_density = 0.;
+  double electron_number_density = solar_model->eDensity(r);
   //std::cout << "ne" << " " << electron_number_density << std::endl;
 
   SU_vector H = DM2*(1./(2.*E));

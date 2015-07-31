@@ -10,7 +10,8 @@ int main(){
   SOP sop;
   Const units;
 
-  std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("Standard");
+  //std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("Standard");
+  std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("DM");
   std::shared_ptr<Const> parameters = std::make_shared<Const>();
 
   parameters->SetMixingAngle(0,1,0.583996); // th12
