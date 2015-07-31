@@ -22,7 +22,7 @@ void littlemermaid::splineinit(){
 	    }
     	gsl_spline_init (Rspline[i].get(), XfluxRarr, YfluxRarr, arraysize);
 	}
-	
+
 	for(unsigned int i = 0; i < num_components; i++){
 		if ( spectrum_filename[FluxType(i)] == ""){
 		Espline[i] = nullptr;

@@ -10,8 +10,8 @@ int main(){
   SOP sop;
   Const units;
 
-  //std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("Standard");
-  std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("DM");
+  std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("Standard");
+  //std::shared_ptr<littlemermaid> sm = std::make_shared<littlemermaid>("DM");
   std::shared_ptr<Const> parameters = std::make_shared<Const>();
 
   parameters->SetMixingAngle(0,1,0.583996); // th12
@@ -27,9 +27,9 @@ int main(){
   //std::cout << sop.SolarOscillationProbability(0.1*units.MeV,0.1) << std::endl;
   //exit(1);
 
-  auto e_range = linspace(0.1,15,20);
+  auto e_range = linspace(0.1,15,2000);
   for(double e: e_range){
-    std::cout << e << " " << sop.SolarOscillationProbability(e*units.MeV,0.01) << std::endl;
+    std::cout << e << " " << sop.SolarOscillationProbability(e*units.MeV,0.001) << std::endl;
   }
 
   return 0;

@@ -77,6 +77,8 @@ marray<double,2> quickread(std::string filepath){
         column_number = row.size();
     }
 
+    infile.close();
+
     marray<double,2> otable {table.size(),column_number};
     for (unsigned int i = 0; i < table.size(); i++)
       for (unsigned int j = 0; j < column_number; j++)
